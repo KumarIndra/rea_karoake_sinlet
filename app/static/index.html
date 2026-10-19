@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#101210">
+    <meta name="description" content="Make a karaoke track from your own music with local AI audio separation.">
+    <title>Singlet — your song, minus the vocals</title>
+    <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Singlet home">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span>singlet<span class="brand-period">.</span></span>
+      </a>
+      <div class="top-note"><span class="privacy-dot"></span> Your music stays on this device</div>
+      <a class="github-link" href="#how-it-works">How it works <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="sparkle">✳</span> YOUR PERSONAL KARAOKE STUDIO</div>
+          <h1>Keep the music.<br>Lose the <span>lead.</span></h1>
+          <p class="intro">Turn any song into a sing-along. Drop in a track and AI separates the vocals from the music—right here on your own machine.</p>
+          <div class="hero-details">
+            <span><span class="check">✓</span> No account needed</span>
+            <span><span class="check">✓</span> Free, local processing</span>
+          </div>
+        </div>
+
+        <div class="studio-card">
+          <div class="card-top">
+            <div><div class="section-kicker">LET'S MAKE A TRACK</div><h2>Start with a song</h2></div>
+            <div class="sound-badge" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+          </div>
+          <label class="dropzone" id="dropzone" for="file-input" tabindex="0">
+            <input id="file-input" type="file" accept=".mp3,.wav,.flac,.m4a,.ogg,audio/*" hidden>
+            <span class="upload-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 15V3m0 0L7.5 7.5M12 3l4.5 4.5M4 15v4.5A1.5 1.5 0 0 0 5.5 21h13a1.5 1.5 0 0 0 1.5-1.5V15" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <strong>Drop your song right here</strong>
+            <span class="drop-sub">or <span class="browse-link">browse files</span> on your device</span>
+            <span class="file-hint">MP3, WAV, FLAC, M4A, OGG <span>·</span> Up to 100 MB</span>
+          </label>
+          <div class="privacy-note"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5 2.5 4v3.7c0 3.1 2.35 5.95 5.5 6.8 3.15-.85 5.5-3.7 5.5-6.8V4L8 1.5Z" stroke="currentColor" stroke-width="1.2"/><path d="m5.5 7.7 1.7 1.7 3.4-3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Your audio is processed locally and never saved to an account.</div>
+          <div class="job-panel" id="job-panel" hidden>
+            <div class="job-heading"><div><div class="section-kicker" id="job-kicker">GETTING THINGS READY</div><h2 id="job-name">Your song</h2></div><button class="text-button" id="reset-button" type="button">Start over</button></div>
+            <div class="progress-line"><span id="progress-fill"></span></div>
+            <p class="job-message" id="job-message" role="status" aria-live="polite"></p>
+            <div class="results" id="results" hidden>
+              <div class="result-row"><span class="result-icon instrumental-icon" aria-hidden="true">♫</span><div class="result-copy"><strong>Karaoke instrumental</strong><span>Music without the lead vocal</span></div><button class="play-button" data-track="instrumental" type="button">Play</button><a class="download-button" data-download="instrumental" download>↓</a></div>
+              <div class="result-row"><span class="result-icon vocal-icon" aria-hidden="true">♬</span><div class="result-copy"><strong>Isolated vocals</strong><span>Just the voice, on its own</span></div><button class="play-button" data-track="vocals" type="button">Play</button><a class="download-button" data-download="vocals" download>↓</a></div>
+              <audio id="audio-player" preload="metadata"></audio>
+            </div>
+          </div>
+          <p class="error-message" id="error-message" role="alert" hidden></p>
+        </div>
+      </section>
+
+      <section class="steps" id="how-it-works">
+        <div class="steps-heading"><div class="section-kicker">A LITTLE MAGIC, THREE STEPS</div><h2>From full volume to your moment.</h2></div>
+        <div class="steps-grid">
+          <article class="step"><div class="step-number">01</div><div class="step-icon icon-mint" aria-hidden="true">↑</div><h3>Bring a song</h3><p>Pick a track from your device. MP3, WAV, and a few other favorites all work.</p></article>
+          <article class="step"><div class="step-number">02</div><div class="step-icon icon-peach" aria-hidden="true">✳</div><h3>Let the AI listen</h3><p>A source-separation model finds the voice and untangles it from the instrumental.</p></article>
+          <article class="step"><div class="step-number">03</div><div class="step-icon icon-lavender" aria-hidden="true">♫</div><h3>Take the mic</h3><p>Preview both versions. Play along with the instrumental, or save a WAV to keep.</p></article>
+        </div>
+      </section>
+
+      <aside class="model-note"><span class="model-sparkle">✳</span><span><strong>A quiet note about AI.</strong> Separation is performed by the open-source Demucs model running locally. Results vary with each mix; a little vocal bleed can happen.</span></aside>
+    </main>
+
+    <footer><a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>singlet<span class="brand-period">.</span></span></a><span>Made for the joy of singing.</span><a href="https://github.com/facebookresearch/demucs">Powered by Demucs ↗</a></footer>
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>
